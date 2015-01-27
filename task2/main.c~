@@ -1,0 +1,109 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+void showbits(unsigned int x);
+int fitness(unsigned int y);
+int *selection2(unsigned int *z, int size);
+int crossover(unsigned int x, unsigned int y);
+int mutate(unsigned int x, double prob);
+
+
+int main(int argc, char *argv){
+
+
+  int i, *fittest, pop_size, gens, iters, crate, mrate, temp1, temp2, pop_fitness;
+  int sflag, gflaf, iflag, cflag, mflag;
+  unsigned int *x;
+
+  sflag=0;
+  gflag=0;
+  iflag=0;
+  cflag=0;
+  mflag=0;
+
+  //FLAGS:
+  //s=size of pop
+  //g=number of gens
+  //i=iters of pd
+  //c=crossover rate
+  //m=mutation rate
+
+  while((opt=getopt(argc,argv, "s:g:i:c:m:"))!-1){
+    switch(opt){
+
+    case 's':
+      pop_size=atoi(optarg);
+      sflag=1;
+      break;
+
+    case 'g':
+      gens=atoi(optarg);
+      gflag=1;
+      break;
+
+    case 'i':
+      iters=atoi(optarg);
+      iflag=1;
+      break;
+
+    case 'c':
+      crate=atoi(optarg);
+      cflag=1;
+      break;
+
+    case 'm':
+      mrate=atoi(optarg);
+      mflag=1;
+      break;
+
+    case '?': 
+      if(isprint(optopt))
+	printf("Unknown option '-%c'\n", optopt);
+      else
+	printf("what's going on here\n");
+      return 1;
+
+    default:
+      abort();
+
+
+    }
+  }
+
+
+  srand(time(NULL));
+  srand48(time(NULL));
+
+  pop_size=10000;
+  iters=10000;
+
+  fittest=malloc(3*sizeof(int));
+  x=malloc(pop_size*sizeof(unsigned int));
+
+
+
+  for(i=0;i<pop_size;i++){
+    x[i]=rand();
+    //printf("%d\n", x[i]);
+  }
+  
+  
+  for(i=0;i<gens;i++){
+    fittest = selection2(x, pop_size);
+    //printf("fittest %d\n", fittest[0]);
+    temp1=crossover(x[fittest[0]],x[fittest[1]]);
+    temp2=crossover(x[fittest[1]],x[fittest[0]]);
+    x[fittest[0]]=temp1;
+    x[fittest[1]]=temp2;
+    pop_fitness=fittest[2];
+    if(i%100==0){
+      printf("fitness of pop = %d; iteration %d\n", pop_fitness, i);
+    }
+  }
+  
+  free(fittest);
+  free(x);
+
+  return 0;
+}

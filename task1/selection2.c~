@@ -1,0 +1,69 @@
+#include<stdlib.h>
+#include<stdio.h>
+
+int fitness(unsigned int y);
+int total_fitness(unsigned int *x, int size);
+
+int *selection2(unsigned int *x, int size){
+
+  int i, *fit, *fittest, total;
+  double *prob, rand;
+
+  //srand48(time(NULL));
+  fit=malloc(size*sizeof(int));
+  prob=malloc(size*sizeof(double));
+  fittest=malloc(2*sizeof(int));
+
+  total=total_fitness(x, size);
+
+  prob[0]=(double)fit[0]/(double)total;
+
+  for(i=1;i<size;i++){
+    prob[i]=prob[i-1]+(double)fit[i]/(double)total;
+    //printf("%f\n", prob[i]);
+  }
+
+
+  //choosing first parent//
+  rand=drand48();
+  
+  if(rand<=prob[0]){
+    fittest[0]=0;
+  }else{
+    for(i=1;i<size-1;i++){
+      if(prob[i-1]<=rand && rand<prob[i]){
+	fittest[0]=i;
+	break;
+      }
+    }
+  }
+
+  
+  //choosing second parent//
+
+  fittest[1]=fittest[0]; //just to set up do while condition
+
+  do{
+    rand=drand48();
+  
+    if(rand<=prob[0]){
+      fittest[1]=0;
+    }else{
+      for(i=1;i<size-1;i++){
+	if(prob[i-1]<=rand && rand<prob[i]){
+	  fittest[1]=i;
+	  break;
+	}
+      }
+    }
+    
+    //printf("%d\n", fittest[1]);
+  }while(fittest[1]==fittest[0]);
+
+  return fittest;
+  
+  free(fittest);
+  free(fit);
+  free(prob);
+
+}
