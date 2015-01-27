@@ -1,4 +1,5 @@
 #include<stdlib.h>
+<<<<<<< HEAD
 #include<time.h>
 #include<math.h>
 
@@ -32,4 +33,21 @@ void mutate(unsigned int x, double prob){
     y=y+xleft+xright;
     showbits(y);
   }
+=======
+
+int mutate(unsigned int x, double prob){
+
+  double r;
+  int s;
+//unsigned int t;
+  r=drand48();
+  s=rand()%32;
+
+  if(r<prob){
+    //t=1<<s;
+    //showbits(t);
+    x^=(1<<s);
+  }
+  return x;
+>>>>>>> 40066235a951046e931344574bac33c18f736725
 }

@@ -1,4 +1,5 @@
-int fitness(unsigned int x){
+int fitness(int pop_size, unsigned int *pop)
+{
 
   int i, fit;
   fit=0;

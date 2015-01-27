@@ -1,4 +1,4 @@
-CC = gcc
+CC = mpicc
 CFLAGS = -Wall
 
 objects=main.o showbits.o fitness.o selection2.o crossover.o mutate.o
