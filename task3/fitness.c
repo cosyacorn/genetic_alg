@@ -1,3 +1,5 @@
+
+
 int fitness(unsigned int x){
 
   int i, fit;
