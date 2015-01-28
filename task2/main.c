@@ -4,7 +4,7 @@
 #include<unistd.h>
 
 void showbits(unsigned int x);
-int fitness(unsigned int *y);
+int *fitness(int pop_size, unsigned int *pop_fitness, int num_games);
 int *selection2(unsigned int *z, int size);
 int crossover(unsigned int x, unsigned int y);
 int mutate(unsigned int x, double prob);
