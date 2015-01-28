@@ -4,7 +4,7 @@
 #include<unistd.h>
 
 void showbits(unsigned int x);
-int *fitness(int pop_size, unsigned int *pop_fitness, int num_games);
+int *fitness(int pop_size, unsigned int *pop, int num_games);
 int *selection2(unsigned int *z, int size);
 int crossover(unsigned int x, unsigned int y);
 int mutate(unsigned int x, double prob);
@@ -13,7 +13,7 @@ int mutate(unsigned int x, double prob);
 int main(int argc, char **argv){
 
 
-  int i, *fittest, pop_size, gens, iters, crate, mrate, temp1, temp2, pop_fitness;
+  int i, *fittest, pop_size, gens, iters, crate, mrate, temp1, temp2, pop_fitness, *fit;
   int sflag, gflag, iflag, cflag, mflag, opt;
   unsigned int *x;
 
@@ -50,12 +50,12 @@ int main(int argc, char **argv){
       break;
 
     case 'c':
-      crate=atoi(optarg);
+      crate=atof(optarg);
       cflag=1;
       break;
 
     case 'm':
-      mrate=atoi(optarg);
+      mrate=atof(optarg);
       mflag=1;
       break;
 
@@ -73,29 +73,35 @@ int main(int argc, char **argv){
     }
   }
 
-  if(sflag=0 || gflag==0 || iflag==0 || cflag==0 || mflag==0){
+  if(sflag==0 || gflag==0 || iflag==0 || cflag==0 || mflag==0){
     printf("------CORRECT USAGE:------ \n%s -s <pop size> -g <num gens> -i <iters of PD> -c <cross rate> -m <mutate rate>\n", argv[0]);
-  }
+  }else{
 
-  else{
+    printf("%d\n",pop_size);
 
     srand(time(NULL));
     srand48(time(NULL));
     
-    pop_size=10000;
-    iters=10000;
+    //pop_size=10000;
+    //iters=10000;
   
     fittest=malloc(3*sizeof(int));
     x=malloc(pop_size*sizeof(unsigned int));
+    fit=malloc(pop_size*sizeof(int));
     
 
 
     for(i=0;i<pop_size;i++){
       x[i]=rand();
-      //printf("%d\n", x[i]);
+    }
+  
+    fit=fitness(pop_size, x, iters);
+    
+    for(i=0;i<pop_size;i++){
+      printf("%d\n",fit[i]);
     }
     
-  
+    /*
     for(i=0;i<gens;i++){
       fittest = selection2(x, pop_size);
       //printf("fittest %d\n", fittest[0]);
@@ -108,9 +114,10 @@ int main(int argc, char **argv){
 	printf("fitness of pop = %d; iteration %d\n", pop_fitness, i);
       }
     }
-    
+    */
     free(fittest);
     free(x);
+    free(fitness);
   }
   return 0;
 }

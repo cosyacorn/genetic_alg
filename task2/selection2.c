@@ -11,6 +11,7 @@ int *selection2(unsigned int *x, int size){
   fit=malloc(size*sizeof(int));
   prob=malloc(size*sizeof(double));
   fittest=malloc(2*sizeof(int));
+
   total=0;
 
   for(i=0;i<size;i++){
