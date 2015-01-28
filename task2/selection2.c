@@ -1,21 +1,19 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-int fitness(unsigned int y);
+//This function returns the two fittest (via roulette selection) members of the pop and also the total fittness of the population
 
-int *selection2(unsigned int *x, int size){
+int *selection2(int *fit, int size){
 
-  int i, *fit, *fittest, total;
+  int i, *fittest, total;
   double *prob, rand;
 
-  fit=malloc(size*sizeof(int));
   prob=malloc(size*sizeof(double));
-  fittest=malloc(2*sizeof(int));
+  fittest=malloc(3*sizeof(int));
 
   total=0;
 
   for(i=0;i<size;i++){
-    fit[i]=fitness(x[i]);
     total+=fit[i];
   }
   

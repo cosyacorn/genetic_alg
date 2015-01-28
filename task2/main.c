@@ -77,14 +77,11 @@ int main(int argc, char **argv){
     printf("------CORRECT USAGE:------ \n%s -s <pop size> -g <num gens> -i <iters of PD> -c <cross rate> -m <mutate rate>\n", argv[0]);
   }else{
 
-    printf("%d\n",pop_size);
+    //printf("%d\n",pop_size);
 
     srand(time(NULL));
     srand48(time(NULL));
     
-    //pop_size=10000;
-    //iters=10000;
-  
     fittest=malloc(3*sizeof(int));
     x=malloc(pop_size*sizeof(unsigned int));
     fit=malloc(pop_size*sizeof(int));
@@ -115,9 +112,9 @@ int main(int argc, char **argv){
       }
     }
     */
-    free(fittest);
+    //free(fittest);
     free(x);
-    free(fitness);
+    free(fit);
   }
   return 0;
 }
