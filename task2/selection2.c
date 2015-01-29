@@ -6,7 +6,7 @@
 int *selection2(int *fit, int size){
 
   int i, *fittest;
-  long unsigned int total;
+  double total;
   double *prob, rand;
 
   prob=malloc(size*sizeof(double));
@@ -15,9 +15,9 @@ int *selection2(int *fit, int size){
   total=0;
 
   for(i=0;i<size;i++){
-    total+=fit[i];
+    total+=(double)fit[i];
   }
-  //printf("total: %d\n", total);
+  printf("total: %f\n", total);
   fittest[2]=total; //use this to give the fitness of the population
 
   prob[0]=(double)fit[0]/(double)total;

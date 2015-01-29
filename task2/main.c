@@ -111,7 +111,7 @@ int main(int argc, char **argv){
       x[fittest[1]]=temp2;
       pop_fitness=fittest[2];
       if(i%100==0){
-	printf("fitness of pop = %d; iteration %d\n", pop_fitness, i);
+	//printf("fitness of pop = %d; iteration %d\n", pop_fitness, i);
       }
     }
     
