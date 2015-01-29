@@ -5,7 +5,7 @@
 
 void showbits(unsigned int x);
 int *fitness(int pop_size, unsigned int *pop, int num_games);
-int *selection2(unsigned int *z, int size);
+long unsigned int *selection2(unsigned int *z, int size);
 int crossover(unsigned int x, unsigned int y, double cross_rate, double mutate_rate);
 int mutate(unsigned int x, double prob);
 
@@ -13,9 +13,10 @@ int mutate(unsigned int x, double prob);
 int main(int argc, char **argv){
 
 
-  int i, *fittest, pop_size, gens, iters, crate, mrate, temp1, temp2, pop_fitness, *fit;
+  int i, pop_size, gens, iters, crate, mrate, temp1, temp2, pop_fitness, *fit;
   int sflag, gflag, iflag, cflag, mflag, opt;
   unsigned int *x;
+  long unsigned int *fittest;
 
   opterr=0;
   sflag=0;
@@ -82,7 +83,7 @@ int main(int argc, char **argv){
     srand(time(NULL));
     srand48(time(NULL));
     
-    fittest=malloc(3*sizeof(int));
+    fittest=malloc(3*sizeof(long unsigned int));
     x=malloc(pop_size*sizeof(unsigned int));
     fit=malloc(pop_size*sizeof(int));
     
@@ -111,7 +112,7 @@ int main(int argc, char **argv){
       x[fittest[1]]=temp2;
       pop_fitness=fittest[2];
       if(i%100==0){
-	//printf("fitness of pop = %d; iteration %d\n", pop_fitness, i);
+	printf("fitness of pop = %d; iteration %d\n", pop_fitness, i);
       }
     }
     

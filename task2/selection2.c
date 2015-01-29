@@ -3,21 +3,21 @@
 
 //This function returns the two fittest (via roulette selection) members of the pop and also the total fittness of the population
 
-int *selection2(int *fit, int size){
+long unsigned int *selection2(int *fit, int size){
 
-  int i, *fittest;
-  double total;
+  int i;
+  long unsigned int total, *fittest;
   double *prob, rand;
 
   prob=malloc(size*sizeof(double));
-  fittest=malloc(3*sizeof(int));
+  fittest=malloc(3*sizeof(long unsigned int));
 
   total=0;
 
   for(i=0;i<size;i++){
-    total+=(double)fit[i];
+    total+=fit[i];
   }
-  printf("total: %f\n", total);
+  //printf("total: %ld\n", total);
   fittest[2]=total; //use this to give the fitness of the population
 
   prob[0]=(double)fit[0]/(double)total;
