@@ -6,7 +6,7 @@
 void showbits(unsigned int x);
 int *fitness(int pop_size, unsigned int *pop, int num_games);
 int *selection2(unsigned int *z, int size);
-int crossover(unsigned int x, unsigned int y);
+int crossover(unsigned int x, unsigned int y, double cross_rate, double mutate_rate);
 int mutate(unsigned int x, double prob);
 
 
@@ -92,18 +92,21 @@ int main(int argc, char **argv){
       x[i]=rand();
     }
   
-    fit=fitness(pop_size, x, iters);
+    //fit=fitness(pop_size, x, iters);
     
-    for(i=0;i<pop_size;i++){
+    /*for(i=0;i<pop_size;i++){
       printf("%d\n",fit[i]);
-    }
+      }*/
     
-    /*
+    
     for(i=0;i<gens;i++){
+      fit=fitness(pop_size, x, iters);
+      //printf("lsadf\n");
       fittest = selection2(x, pop_size);
       //printf("fittest %d\n", fittest[0]);
-      temp1=crossover(x[fittest[0]],x[fittest[1]]);
-      temp2=crossover(x[fittest[1]],x[fittest[0]]);
+      temp1=crossover(x[fittest[0]],x[fittest[1]], crate, mrate);
+      temp2=crossover(x[fittest[1]],x[fittest[0]], crate, mrate);
+      //printf("temp1 %d\n",temp1);
       x[fittest[0]]=temp1;
       x[fittest[1]]=temp2;
       pop_fitness=fittest[2];
@@ -111,8 +114,8 @@ int main(int argc, char **argv){
 	printf("fitness of pop = %d; iteration %d\n", pop_fitness, i);
       }
     }
-    */
-    //free(fittest);
+    
+    free(fittest);
     free(x);
     free(fit);
   }

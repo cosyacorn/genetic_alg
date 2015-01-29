@@ -1,8 +1,8 @@
 #include<stdlib.h>
 
-int mutate(unsigned int x, double rate);
+int mutate(unsigned int x, double mutate_rate);
 
-int crossover(unsigned int x, unsigned int y, double cross_rate){
+int crossover(unsigned int x, unsigned int y, double cross_rate, double mutate_rate){
 
   unsigned int z, x1, x2, y1, y2;
   int r;
@@ -10,7 +10,7 @@ int crossover(unsigned int x, unsigned int y, double cross_rate){
 
   s=drand48();
 
-  if(s>corss_rate){
+  if(s>cross_rate){
     return x;
   }
   else{
@@ -24,7 +24,7 @@ int crossover(unsigned int x, unsigned int y, double cross_rate){
     y2 = y1 >> (32-r);
 
     z = x2|y2;
-    z=mutate(z,0.1);
+    z=mutate(z,mutate_rate);
     return z;
   }
 }
